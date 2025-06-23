@@ -1,1 +1,0 @@
-import{Q as a,a as r}from"./QLayout.eb9cac4a.js";import{k as n,l as s,p,q as u,s as e,u as t}from"./index.78c4b5c8.js";import"./QScrollObserver.51674558.js";const d=n({__name:"AuthLayout",setup(_){return(c,i)=>{const o=s("router-view");return p(),u(a,{view:"hHh LpR fFf"},{default:e(()=>[t(r,null,{default:e(()=>[t(o)]),_:1})]),_:1})}}});export{d as default};
