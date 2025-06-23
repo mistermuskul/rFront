@@ -52,17 +52,17 @@ module.exports = configure(function (/* ctx */) {
       },
 
       vueRouterMode: 'hash', // available values: 'hash', 'history'
-      vueRouterBase: '/rFront/',
+      vueRouterBase: process.env.NODE_ENV === 'development' ? '/' : '/rFront/',
       // vueDevtools,
       // vueOptionsAPI: false,
 
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
 
-      publicPath: '/rFront/',
+      publicPath: process.env.NODE_ENV === 'development' ? '/' : '/rFront/',
       // analyze: true,
       env: {
         VUE_ROUTER_MODE: 'hash',
-        VUE_ROUTER_BASE: '/rFront/'
+        VUE_ROUTER_BASE: process.env.NODE_ENV === 'development' ? '/' : '/rFront/'
       },
       // rawDefine: {}
       // ignorePublicFolder: true,

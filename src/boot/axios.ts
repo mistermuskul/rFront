@@ -1,8 +1,9 @@
 import { boot } from 'quasar/wrappers'
 import axios from 'axios'
+import { getCurrentApiConfig } from 'src/config/app.config'
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'https://rserver-production.up.railway.app/api',
+  baseURL: getCurrentApiConfig().baseURL,
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
@@ -33,7 +34,8 @@ api.interceptors.response.use(
 )
 
 export default boot(({ app }) => {
-  app.config.globalProperties.$axios = axios
+  // Убираем глобальный $axios, оставляем только настроенный $api
+  // app.config.globalProperties.$axios = axios
   app.config.globalProperties.$api = api
 })
 

@@ -5,6 +5,7 @@ import {
   createWebHashHistory,
   createWebHistory,
 } from 'vue-router';
+import { getRouterBase } from 'src/config/app.config';
 
 import routes from './routes';
 
@@ -29,7 +30,7 @@ export default route(function (/* { store } */) {
     // Leave this as is and make changes in quasar.conf.js instead!
     // quasar.conf.js -> build -> vueRouterMode
     // quasar.conf.js -> build -> publicPath
-    history: createHistory(process.env.VUE_ROUTER_BASE),
+    history: createHistory(getRouterBase()),
   });
 
   Router.beforeEach(async (...args) => {

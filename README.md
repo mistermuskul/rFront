@@ -15,7 +15,7 @@ npm install
 
 ### Разработка
 ```bash
-npm run dev
+quasar dev
 ```
 
 ### Сборка для продакшена
