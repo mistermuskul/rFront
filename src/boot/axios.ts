@@ -2,7 +2,7 @@ import { boot } from 'quasar/wrappers'
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'https://your-app-name.railway.app/api',
+  baseURL: import.meta.env.VITE_API_URL || 'https://rserver-production.up.railway.app/api',
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
