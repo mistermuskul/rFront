@@ -33,7 +33,6 @@
       </div>
     </div>
 
-    <!-- Модальное окно добавления/редактирования -->
     <teleport to="body">
       <q-dialog
         v-model="showDialog"

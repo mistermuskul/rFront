@@ -35,7 +35,6 @@
       <div class="slider-gradient right"></div>
     </div>
 
-    <!-- Модальное окно управления проектами -->
     <teleport to="body">
       <div v-if="showManager" class="modal-overlay" @click.self="showManager = false">
         <div class="modal-window">

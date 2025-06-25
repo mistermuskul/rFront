@@ -49,10 +49,6 @@
         <q-card-section class="dialog-content">
           <div class="account-info">
             <div class="info-item">
-              <span class="label">Ссылка:</span>
-              <span class="value">{{ hrAccountUrl }}</span>
-            </div>
-            <div class="info-item">
               <span class="label">Email:</span>
               <span class="value">{{ hrAccountEmail }}</span>
             </div>
@@ -60,12 +56,16 @@
               <span class="label">Пароль:</span>
               <span class="value">{{ hrAccountPassword }}</span>
             </div>
+            <div class="info-item">
+              <span class="label">Готовое сообщение для HR:</span>
+              <div class="message-preview">{{ hrMessage }}</div>
+            </div>
           </div>
         </q-card-section>
 
         <q-card-actions align="right" class="dialog-actions">
           <q-btn flat label="Закрыть" color="negative" v-close-popup class="action-btn" />
-          <q-btn flat label="Скопировать ссылку" color="primary" @click="copyHRAccountUrl" class="action-btn" />
+          <q-btn flat label="Скопировать сообщение" color="primary" @click="copyHRAccountUrl" class="action-btn" />
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -94,15 +94,32 @@ const hrAccountUrl = ref('')
 const hrAccountEmail = ref('')
 const hrAccountPassword = ref('')
 
+const hrMessage = computed(() => {
+  return `Здравствуйте!
+
+Хочу представить вам мой сайт-портфолио: ${hrAccountUrl.value}
+
+Здесь вы можете ознакомиться с моими проектами, опытом работы и навыками. Никаких дополнительных действий не требуется - просто переходите по ссылке и изучайте информацию.
+
+Буду рад ответить на любые вопросы!
+
+На сайте есть чат, в котором вы можете задать мне вопросы.
+
+Он интегрирован с телеграм ботом, поэтому вы можете писать мне в любое время.
+
+Спасибо за внимание!
+`
+})
+
 const isAdmin = computed(() => {
   return auth.user?.id === 1
 })
 
 const copyHRAccountUrl = () => {
-  navigator.clipboard.writeText(hrAccountUrl.value)
+  navigator.clipboard.writeText(hrMessage.value)
   $q.notify({
     type: 'positive',
-    message: 'Ссылка скопирована в буфер обмена'
+    message: 'Сообщение скопировано в буфер обмена'
   })
 }
 
@@ -121,7 +138,8 @@ const generateHRAccount = async () => {
     const response = await api.post('/user/generate-hr')
     if (response.status === 201 && response.data.success) {
       const { uuid, email, password } = response.data
-      const generatedUrl = `${window.location.origin}/admin/${uuid}`
+      const baseUrl = window.location.href.split('/').slice(0, -1).join('/')
+      const generatedUrl = `${baseUrl}/admin/${uuid}`
       hrAccountUrl.value = generatedUrl
       hrAccountEmail.value = email
       hrAccountPassword.value = password
@@ -200,6 +218,20 @@ const logout = () => {
   background: rgba(255, 255, 255, 0.05);
   padding: 0.5rem;
   border-radius: 4px;
+}
+
+.message-preview {
+  color: #ffffff;
+  font-size: 0.9rem;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  white-space: pre-line;
+  line-height: 1.5;
+  max-height: 200px;
+  overflow-y: auto;
+  font-family: 'Courier New', monospace;
 }
 
 .dialog-actions {

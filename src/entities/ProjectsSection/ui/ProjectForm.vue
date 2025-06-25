@@ -49,11 +49,8 @@ const form = ref<ProjectForm>({
 
 const imageUrl = computed(() => {
   if (!form.value.image) return ''
-  // Если URL уже полный, возвращаем как есть
   if (form.value.image.startsWith('http')) return form.value.image
-  // Если это base64, возвращаем как есть
   if (form.value.image.startsWith('data:image')) return form.value.image
-  // Иначе добавляем базовый URL сервера
   return `http://127.0.0.1:8000${form.value.image}`
 })
 
