@@ -15,7 +15,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import { AboutMe } from '../../../../entities/AboutMe/index'
 import { HeroSection } from '../../../../entities/HeroSection/index'
 import { SkillsSection } from '../../../../entities/SkillsSection/index'
@@ -25,7 +26,15 @@ import AnimatedAnimals from '../../../../shared/ui/AnimatedAnimals.vue'
 import { ProjectsSection } from '../../../../entities/ProjectsSection/index'
 import { ChatWidget } from '../../../../entities/Chat/index'
 
+const route = useRoute()
 const adminAvatar = ref('')
+
+onMounted(() => {
+  console.log('MainPage mounted')
+  console.log('Route params:', route.params)
+  console.log('Route path:', route.path)
+  console.log('Route name:', route.name)
+})
 </script>
 
 <style scoped>

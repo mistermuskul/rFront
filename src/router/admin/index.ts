@@ -1,9 +1,4 @@
 export default [
-    {
-      path: '',
-      name: 'Dashboard',
-      component: () => import('pages/admin/MainPage/index'),
-    },
-   
-   
+    // Dashboard роут уже определен в основном routes.ts
+    // Здесь можно добавить дополнительные admin роуты
 ]

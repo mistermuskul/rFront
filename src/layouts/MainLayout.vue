@@ -163,7 +163,7 @@ const generateHRAccount = async () => {
 
 const logout = () => {
   auth.logout()
-  router.push('/auth/login')
+  router.replace('/auth/login')
 }
 </script>
 

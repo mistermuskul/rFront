@@ -9,7 +9,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/auth',
-    component: () => import('layouts/AuthLayout.vue'),
+    component: () => import('src/layouts/AuthLayout.vue'),
     children: authRoutes,
     meta: {
       requireAuth: false
@@ -17,12 +17,12 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/admin',
-    component: () => import('layouts/MainLayout.vue'),
+    component: () => import('src/layouts/MainLayout.vue'),
     children: [
       {
         path: ':uuid',
         name: 'AdminWithUUID',
-        component: () => import('layouts/MainLayout.vue'),
+        component: () => import('src/pages/admin/MainPage/index'),
         meta: {
           requireAuth: false
         }
@@ -30,7 +30,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: '',
         name: 'Dashboard',
-        component: () => import('pages/IndexPage.vue'),
+        component: () => import('src/pages/admin/MainPage/index'),
         meta: {
           requireAuth: true,
           roles: ['SuperAdmin', 'Admin', 'HR'],
@@ -46,7 +46,7 @@ const routes: RouteRecordRaw[] = [
   // Always leave this as last one
   {
     path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue'),
+    component: () => import('src/pages/ErrorNotFound.vue'),
   },
 ];
 

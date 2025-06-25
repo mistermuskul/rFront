@@ -43,17 +43,22 @@ export const useAuthStore = defineStore('auth', {
       }
     },
     async autoLogin(uuid: string) {
+      console.log('Auto login started with UUID:', uuid)
       this.loading = true;
       try {
         const response = await api.post(`/auth/auto-login/${uuid}`);
+        console.log('Auto login response:', response.data)
         if (response.data.success) {
           this.token = response.data.token;
           localStorage.setItem('token', this.token!);
           await this.fetchUser();
+          console.log('Auto login successful, user:', this.user)
           return true;
         }
+        console.log('Auto login failed: success is false')
         return false;
       } catch (error) {
+        console.error('Auto login error:', error)
         this.token = null;
         localStorage.removeItem('token');
         this.user = null;

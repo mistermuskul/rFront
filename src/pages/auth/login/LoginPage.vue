@@ -68,7 +68,7 @@ const onSubmit = async () => {
       message: 'Успешный вход в систему',
       position: 'top'
     })
-    router.push({ name: 'Dashboard' })
+    await router.replace({ name: 'Dashboard' })
   } catch (error) {
     const axiosError = error as AxiosError<ErrorResponse>
     $q.notify({

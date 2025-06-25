@@ -1,47 +1,50 @@
 <template>
-  <q-page class="row items-center justify-evenly">
-    <example-component
-      title="Example component"
-      active
-      :todos="todos"
-      :meta="meta"
-    ></example-component>
+  <q-page class="q-pa-md">
+    <div class="row q-col-gutter-md">
+      <div class="col-12">
+        <q-card class="admin-dashboard">
+          <q-card-section>
+            <div class="text-h5">Админ-панель</div>
+            <div class="text-subtitle2 q-mt-sm">Добро пожаловать в систему управления</div>
+          </q-card-section>
+          
+          <q-card-section>
+            <div class="row q-col-gutter-md">
+              <div class="col-12 col-md-6">
+                <q-card class="bg-primary text-white">
+                  <q-card-section>
+                    <div class="text-h6">Управление проектами</div>
+                    <div class="text-subtitle2">Добавляйте и редактируйте проекты</div>
+                  </q-card-section>
+                </q-card>
+              </div>
+              
+              <div class="col-12 col-md-6">
+                <q-card class="bg-secondary text-white">
+                  <q-card-section>
+                    <div class="text-h6">Профиль героя</div>
+                    <div class="text-subtitle2">Настройте главную информацию</div>
+                  </q-card-section>
+                </q-card>
+              </div>
+            </div>
+          </q-card-section>
+        </q-card>
+      </div>
+    </div>
   </q-page>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { Todo, Meta } from 'components/models';
-import ExampleComponent from 'components/ExampleComponent.vue';
-
 defineOptions({
   name: 'IndexPage'
 });
-
-const todos = ref<Todo[]>([
-  {
-    id: 1,
-    content: 'ct1'
-  },
-  {
-    id: 2,
-    content: 'ct2'
-  },
-  {
-    id: 3,
-    content: 'ct3'
-  },
-  {
-    id: 4,
-    content: 'ct4'
-  },
-  {
-    id: 5,
-    content: 'ct5'
-  }
-]);
-
-const meta = ref<Meta>({
-  totalCount: 1200
-});
 </script>
+
+<style scoped>
+.admin-dashboard {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+</style>

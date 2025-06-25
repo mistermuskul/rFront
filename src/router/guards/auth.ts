@@ -7,25 +7,29 @@ export async function authGuard(
   from: RouteLocationNormalized,
   next: NavigationGuardNext
 ) {
+  console.log('Auth guard triggered:', { to: to.path, from: from.path })
+  
   const auth = useAuthStore()
   if (!auth.token && localStorage.getItem('token')) {
     auth.token = localStorage.getItem('token')
-  }
-
-  if (to.name === 'login' && auth.isAuthenticated) {
-    return next({ name: 'Dashboard' })
   }
 
   const fullPath = window.location.href
   const uuidMatch = fullPath.match(/\/admin\/([^\/#]+)/)
   if (uuidMatch) {
     const uuid = uuidMatch[1]
+    console.log('UUID found:', uuid)
     const autoLoginSuccess = await auth.autoLogin(uuid)
+    console.log('Auto login result:', autoLoginSuccess)
     if (autoLoginSuccess) {
       return next()
     } else {
       return next({ name: 'login' })
     }
+  }
+
+  if (to.name === 'login' && auth.isAuthenticated) {
+    return next({ name: 'Dashboard' })
   }
 
   if (!auth.token) {
@@ -36,8 +40,14 @@ export async function authGuard(
   }
 
   if (!auth.user) {
-    await auth.fetchUser()
-    if (!auth.user) {
+    try {
+      await auth.fetchUser()
+      if (!auth.user) {
+        auth.logout()
+        return next({ name: 'login' })
+      }
+    } catch (error) {
+      auth.logout()
       return next({ name: 'login' })
     }
   }
