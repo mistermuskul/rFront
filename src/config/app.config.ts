@@ -1,4 +1,4 @@
-export const USE_LOCAL_API = true; // true = локальный, false = сервер
+export const USE_LOCAL_API = false; // true = локальный, false = сервер
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
